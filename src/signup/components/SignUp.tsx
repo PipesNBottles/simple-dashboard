@@ -1,26 +1,62 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SignupInputs } from "../../shared/Inputs";
+import { Levels } from "../../shared/Enums";
+import { v4 } from "uuid";
 
 const SignupForm = () => {
 	const { register, handleSubmit, formState: { errors } } = useForm<SignupInputs>();
-	const onSubmit: SubmitHandler<SignupInputs> = (data) => console.log(data);
-
-	// TODO handle UUID generation on send
+	const onSubmit: SubmitHandler<SignupInputs> = (data) => {
+		data.id = v4();
+		console.log(data);
+	};
 
 	return (
-		<div>
-			<form onSubmit={ handleSubmit(onSubmit) }>
-				<div className="row">
-					<div className="col">
-						<input type="text" placeholder="email" {...register("first_name", { required: true }) }/>
-						<input type="text" placeholder="password" {...register("last_name", { required : true }) }/>
-						<input type="text" placeholder="password" {...register("email", { required : true }) }/>
-						<input type="text" placeholder="password" {...register("password", { required : true }) }/>
-						<input type="submit"/>
-					</div>
+		<form>
+			<div className="form-row">
+				<div className="form-group col-3 md-6">
+					<label htmlFor="signup-first-name"> First Name</label>
+					<input type="text" className="form-control" id="input-first-name" placeholder="First Name"
+						{ ...register("first_name", {required: true})}/>
 				</div>
-			</form>
-		</div>
+			</div>
+			<div className="form-row">
+				<div className="form-group col-3 md-6 mt-3">
+					<label htmlFor="signup-last-name"> Last Name</label>
+					<input type="text" className="form-control" id="input-last-name" placeholder="Last Name"
+						{ ...register("last_name", {required: true})}/>
+				</div>
+			</div>
+			<div className="form-row">
+				<div className="form-group col-3 md-6 mt-3">
+					<label htmlFor="signup-email"> Email Address</label>
+					<input type="email" className="form-control" id="input-email" placeholder="Enter Email"
+						{ ...register("email", {required: true})}/>
+				</div>
+			</div>
+			<div className="form-row">
+				<div className="form-group col-3 md-6 mt-3">
+					<label htmlFor="signup-password"> Email Address</label>
+					<input type="password" className="form-control" id="input-password" placeholder="Enter Password"
+						{ ...register("password", {required: true})}/>
+				</div>
+			</div>
+			<div className="form-row">
+				<div className="form-group col-3 md-6 mt-3">
+					<label htmlFor="input-level">Select Level</label>
+					<select className="form-control" id="input-level" { ...register("level", { required: true, valueAsNumber: true })}>
+						<option value={ Levels.employee }>Employee</option>
+						<option value={ Levels.manager }>Manager</option>
+					</select>
+				</div>
+			</div>
+			<div className="form-row">
+				<div className="form-group col-md-3 mt-3">
+					<button type="submit" className="btn btn-primary" onClick={ handleSubmit(onSubmit) }>
+					Submit
+					</button>
+				</div>
+			</div>
+		</form>
 	);
 };
 

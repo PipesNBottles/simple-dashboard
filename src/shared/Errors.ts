@@ -1,13 +1,13 @@
 export interface Error422 {
-    detail: Array<DetailedErrors>
+    detail: DetailedErrors[],
 }
 
 export interface Error400 {
-    detail: string
+    detail: string,
 }
 
 interface DetailedErrors {
-    loc: Array<string>,
+    loc: string[],
     msg: string,
-    type: string
+    type: string,
 }
