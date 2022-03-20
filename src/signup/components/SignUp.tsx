@@ -4,7 +4,7 @@ import { Levels } from "../../shared/Enums";
 import { v4 } from "uuid";
 
 const SignupForm = () => {
-	const { register, handleSubmit, formState: { errors } } = useForm<SignupInputs>();
+	const { register, handleSubmit } = useForm<SignupInputs>();
 	const onSubmit: SubmitHandler<SignupInputs> = (data) => {
 		data.id = v4();
 		console.log(data);

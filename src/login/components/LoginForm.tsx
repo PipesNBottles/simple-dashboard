@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginInputs } from "../../shared/Inputs";
 
 const LoginForm: React.FC = () => {
-	const { register, handleSubmit, formState: { errors } } = useForm<LoginInputs>();
+	const { register, handleSubmit } = useForm<LoginInputs>();
 	const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
 
 	return (
