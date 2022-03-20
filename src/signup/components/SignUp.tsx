@@ -1,10 +1,10 @@
-import {useForm, SubmitHandler} from 'react-hook-form';
-import {v4} from 'uuid';
-import {SignupInputs} from '../../shared/Inputs';
-import {Levels} from '../../shared/Enums';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { v4 } from 'uuid';
+import { SignupInputs } from '../../shared/Inputs';
+import { Levels } from '../../shared/Enums';
 
 const SignupForm: React.FC = () => {
-  const {register, handleSubmit} = useForm<SignupInputs>();
+  const { register, handleSubmit } = useForm<SignupInputs>();
   const onSubmit: SubmitHandler<SignupInputs> = (data) => {
     data.id = v4();
     console.log(data);
@@ -20,7 +20,7 @@ const SignupForm: React.FC = () => {
             className="form-control"
             id="input-first-name"
             placeholder="First Name"
-            {...register('first_name', {required: true})}
+            {...register('first_name', { required: true })}
           />
         </div>
       </div>
@@ -32,7 +32,7 @@ const SignupForm: React.FC = () => {
             className="form-control"
             id="input-last-name"
             placeholder="Last Name"
-            {...register('last_name', {required: true})}
+            {...register('last_name', { required: true })}
           />
         </div>
       </div>
@@ -44,7 +44,7 @@ const SignupForm: React.FC = () => {
             className="form-control"
             id="input-email"
             placeholder="Enter Email"
-            {...register('email', {required: true})}
+            {...register('email', { required: true })}
           />
         </div>
       </div>
@@ -56,7 +56,7 @@ const SignupForm: React.FC = () => {
             className="form-control"
             id="input-password"
             placeholder="Enter Password"
-            {...register('password', {required: true})}
+            {...register('password', { required: true })}
           />
         </div>
       </div>
@@ -65,7 +65,7 @@ const SignupForm: React.FC = () => {
           <label htmlFor="input-level">Select Level</label>
           <select className="form-control"
             id="input-level"
-            {...register('level', {required: true, valueAsNumber: true})}>
+            {...register('level', { required: true, valueAsNumber: true })}>
             <option value={Levels.EMPLOYEE}>Employee</option>
             <option value={Levels.MANAGER}>Manager</option>
           </select>

@@ -1,8 +1,8 @@
-import {useForm, SubmitHandler} from 'react-hook-form';
-import {LoginInputs} from '../../shared/Inputs';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { LoginInputs } from '../../shared/Inputs';
 
 const LoginForm: React.FC = () => {
-  const {register, handleSubmit} = useForm<LoginInputs>();
+  const { register, handleSubmit } = useForm<LoginInputs>();
   const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
 
   return (
@@ -15,7 +15,7 @@ const LoginForm: React.FC = () => {
             className="form-control"
             id="input-email"
             placeholder="Enter Email"
-            {...register('email', {required: true})}
+            {...register('email', { required: true })}
           />
           <small id="email-help" className="form-text text-muted">
             Enter your email, we definitely will not leak it
@@ -30,7 +30,7 @@ const LoginForm: React.FC = () => {
             className="form-control"
             id="input-password"
             placeholder="Password"
-            {...register('password', {required: true})}
+            {...register('password', { required: true })}
           />
         </div>
       </div>

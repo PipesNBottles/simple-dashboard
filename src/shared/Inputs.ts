@@ -1,4 +1,4 @@
-import {Levels} from './Enums';
+import { Levels } from './Enums';
 
 export interface LoginInputs {
     email: string,
