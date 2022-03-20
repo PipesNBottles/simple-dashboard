@@ -1,4 +1,4 @@
 export const enum Levels {
-    manager = 2,
-    employee = 1,
-}
+    MANAGER = 2,
+    EMPLOYEE = 1,
+};
