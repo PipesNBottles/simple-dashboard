@@ -6,7 +6,7 @@ export interface Error400 {
     detail: string,
 }
 
-interface DetailedErrors {
+export interface DetailedErrors {
     loc: string[],
     msg: string,
     type: string,

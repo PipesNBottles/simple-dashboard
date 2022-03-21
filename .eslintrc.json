@@ -5,7 +5,8 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "google"
+        "google",
+        "plugin:react/jsx-runtime"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -25,6 +26,7 @@
         "indent": ["error", 2],
         "object-curly-spacing": ["error", "always"],
         "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["error"]
+        "@typescript-eslint/no-unused-vars": ["error"],
+        "require-jsdoc": "off"
     }
 }

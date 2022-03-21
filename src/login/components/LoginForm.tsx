@@ -1,9 +1,16 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginInputs } from '../../shared/Inputs';
+import { fetchLogin } from '../../shared/redux/actions/loginActions';
 
 const LoginForm: React.FC = () => {
   const { register, handleSubmit } = useForm<LoginInputs>();
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
+  const token = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+    dispatch(fetchLogin(data));
+    console.log(data, token);
+  };
 
   return (
     <form>
