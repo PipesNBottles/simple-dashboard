@@ -13,3 +13,14 @@ export interface SignupInputs {
     email: string,
     password: string,
 }
+
+export interface Shift {
+    id: number,
+    user_id: string,
+    start_time: string,
+    end_time: string,
+}
+
+export interface User extends Omit<SignupInputs, 'password'> {
+    shifts: Shift[],
+}

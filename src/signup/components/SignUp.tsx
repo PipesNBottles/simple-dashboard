@@ -2,12 +2,19 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { v4 } from 'uuid';
 import { SignupInputs } from '../../shared/Inputs';
 import { Levels } from '../../shared/Enums';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchSignup } from '../../shared/redux/signup/actions/signupActions';
 
 const SignupForm: React.FC = () => {
   const { register, handleSubmit } = useForm<SignupInputs>();
+  const dispatch = useDispatch();
+  const currState = useSelector((state) => state);
+
+
   const onSubmit: SubmitHandler<SignupInputs> = (data) => {
     data.id = v4();
-    console.log(data);
+    dispatch(fetchSignup(data));
+    console.log(currState);
   };
 
   return (
