@@ -1,7 +1,7 @@
 import { Levels } from './Enums';
 
 export interface LoginInputs {
-    email: string,
+    username: string,
     password: string,
 }
 

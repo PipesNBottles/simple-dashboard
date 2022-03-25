@@ -1,24 +1,21 @@
 import { AnyAction } from 'redux';
 import {
-  LoginState,
-  LoginAction,
   FETCH_LOGIN_REQUEST,
   FETCH_LOGIN_SUCCESS,
   FETCH_LOGIN_FAILURE,
 } from '../actions/loginActions';
 
-import { DetailedErrors } from '../../Errors';
+import { LoginState, LoginAction } from '../types';
 
 
 const initialLoginState: LoginState = {
   loading: false,
-  token: '',
-  errors: <DetailedErrors>{},
+  payload: {},
   error: '',
 };
 
-export function loginReducer(state: LoginState = initialLoginState,
-  action: LoginAction | AnyAction) {
+// eslint-disable-next-line max-len
+export function loginReducer(state: LoginState = initialLoginState, action: LoginAction | AnyAction): LoginState {
   switch (action.type) {
   case FETCH_LOGIN_REQUEST:
     return {
@@ -29,17 +26,16 @@ export function loginReducer(state: LoginState = initialLoginState,
     return {
       ...state,
       loading: false,
-      token: 'success',
+      payload: action.payload,
       error: '',
+      status: action.status,
     };
   case FETCH_LOGIN_FAILURE:
     return {
       loading: false,
-      token: '',
-      errors: <DetailedErrors>{
-        ...action.payload,
-      },
-      error: 'error',
+      payload: action.payload,
+      error: action.errorMessage,
+      status: action.status,
     };
   default: return state;
   }

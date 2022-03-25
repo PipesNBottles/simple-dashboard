@@ -1,15 +1,16 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginInputs } from '../../shared/Inputs';
-import { fetchLogin } from '../../shared/redux/actions/loginActions';
+import { fetchLogin } from '../../shared/redux/login/actions/loginActions';
 
 const LoginForm: React.FC = () => {
   const { register, handleSubmit } = useForm<LoginInputs>();
   const token = useSelector((state) => state);
   const dispatch = useDispatch();
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    dispatch(fetchLogin(data));
-    console.log(data, token);
+    const formData = new URLSearchParams(data);
+    dispatch(fetchLogin(formData));
+    console.log(token);
   };
 
   return (
@@ -22,7 +23,7 @@ const LoginForm: React.FC = () => {
             className="form-control"
             id="input-email"
             placeholder="Enter Email"
-            {...register('email', { required: true })}
+            {...register('username', { required: true })}
           />
           <small id="email-help" className="form-text text-muted">
             Enter your email, we definitely will not leak it
