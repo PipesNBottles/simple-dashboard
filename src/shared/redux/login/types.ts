@@ -8,7 +8,9 @@ export interface LoginAction {
 
 export interface LoginState {
   loading: boolean,
-  payload : object,
+  payload : {
+   token: { [key: string]: string }
+  },
   error?: string,
   status?: number,
 };
