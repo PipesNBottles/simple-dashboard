@@ -1,7 +1,7 @@
 import './App.css';
 import { Outlet } from 'react-router-dom';
 import { injectStyle } from 'react-toastify/dist/inject-style';
-import { ToastContainer } from 'react-toastify';
+import WelcomPage from './shared/components/WelcomPage';
 
 if (typeof window !== 'undefined') {
   injectStyle();
@@ -11,7 +11,7 @@ function App() {
   return (
     <div>
       <Outlet />
-      <ToastContainer />
+      <WelcomPage />
     </div>
   );
 }
