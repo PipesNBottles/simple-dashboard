@@ -1,20 +1,29 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { v4 } from 'uuid';
 import { SignupInputs } from '../../shared/Inputs';
 import { Levels } from '../../shared/Enums';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSignup } from '../../shared/redux/signup/actions/signupActions';
+import { getUserInfo } from '../../shared/redux/selectors';
 
 const SignupForm: React.FC = () => {
   const { register, handleSubmit } = useForm<SignupInputs>();
   const dispatch = useDispatch();
-  const currState = useSelector((state) => state);
+  const currState = useSelector(getUserInfo);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currState) {
+      navigate('/dashboard');
+    }
+  }, [currState]);
 
 
   const onSubmit: SubmitHandler<SignupInputs> = (data) => {
     data.id = v4();
     dispatch(fetchSignup(data));
-    console.log(currState);
   };
 
   return (

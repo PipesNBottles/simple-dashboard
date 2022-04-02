@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Dispatch } from 'react';
 import { SignupAction } from '../types';
 import { errorNotice, successNotice } from '../../dialogs/actions/toastActions';
+import { SignupInputs } from '../../../Inputs';
 
 
 export const FETCH_SIGN_UP_SUCCESS = 'FETCH_SIGN_UP_SUCCESS';
@@ -42,7 +43,7 @@ function fetchNetworkFailure(error: Error): SignupAction {
   };
 }
 
-export function fetchSignup(data: any) {
+export function fetchSignup(data: SignupInputs) {
   return function(dispatch: Dispatch<any>) {
     dispatch(fetchSignup); {
       axios.post('http://dev.shift.local/v1/users', data)
