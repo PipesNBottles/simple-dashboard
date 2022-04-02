@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'react';
 import { SignupAction } from '../types';
+import { errorNotice, successNotice } from '../../dialogs/actions/toastActions';
 
 
 export const FETCH_SIGN_UP_SUCCESS = 'FETCH_SIGN_UP_SUCCESS';
@@ -47,12 +48,15 @@ export function fetchSignup(data: any) {
       axios.post('http://dev.shift.local/v1/users', data)
         .then((response) => {
           dispatch(fetchSignupSuccess(response.data));
+          dispatch(successNotice);
         })
         .catch((error) => {
           if (axios.isAxiosError(error)) {
             dispatch(fetchSignupFailure(error.response));
+            dispatch(errorNotice(error.response));
           } else {
             dispatch(fetchNetworkFailure(error.response));
+            dispatch(errorNotice(error.request));
           }
         });
     };

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'react';
 import { LoginAction } from '../types';
+import { errorNotice, successNotice } from '../../dialogs/actions/toastActions';
 
 
 export const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS';
@@ -41,18 +42,21 @@ export function fetchNetworkFailure(error: Error): LoginAction {
   };
 }
 
-export function fetchLogin(data: any) {
+export function fetchLogin(data: URLSearchParams) {
   return function(dispatch: Dispatch<any>) {
     dispatch(fetchLoginRequest);
     axios.post('http://dev.shift.local/token', data)
       .then((response) => {
         dispatch(fetchLoginSuccess(response.data));
+        dispatch(successNotice);
       })
       .catch((error) => {
         if (axios.isAxiosError(error)) {
           dispatch(fetchLoginFailure(error.response));
+          dispatch(errorNotice(error.response));
         } else {
           dispatch(fetchNetworkFailure(error.request));
+          dispatch(errorNotice(error.request));
         }
       });
   };

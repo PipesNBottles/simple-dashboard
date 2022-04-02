@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { ReactText } from 'react';
 import { toast } from 'react-toastify';
 import { ToastDetails } from '../../../types';
@@ -36,20 +37,18 @@ function createToast(toastDetails: ToastDetails) {
   }
 }
 
-export function errorNotice(error: any) {
+export function errorNotice(error: AxiosError['response']) {
   const errorMessage: ToastDetails = {
-    message: '',
+    message: 'Something went wrong',
     duration: 3,
     type: ERROR_TOAST,
   };
-
-  switch (error.status) {
-  case 400:
+  if ( error && error?.status >= 400 && error?.status < 422) {
     errorMessage.message = error.data?.detail || 'Something went wrong';
-    break;
-  default:
-    errorMessage.message = 'Something went wrong';
-    break;
+  } else if (error?.status == 422) {
+    errorMessage.message = (
+      error.data.detail?.[0].msg ||
+      'You messed up an input');
   }
   return createToast(errorMessage);
 }
