@@ -11,3 +11,11 @@ export interface DetailedErrors {
     msg: string,
     type: string,
 }
+
+type ToastTypes = 'error' | 'success'
+
+export type ToastDetails = {
+    message: string,
+    duration: number,
+    type: ToastTypes,
+}
