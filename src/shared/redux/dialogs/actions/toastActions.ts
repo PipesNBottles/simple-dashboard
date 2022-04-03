@@ -11,14 +11,14 @@ export type ToastAction = {
   toast: ReactText
 }
 
-function createToastSuccess(toastMessage: any): ToastAction {
+function createToastSuccess(toastMessage: ReactText): ToastAction {
   return {
     type: SUCCESS_TOAST,
     toast: toastMessage,
   };
 }
 
-function createToastError(toastMessage: any): ToastAction {
+function createToastError(toastMessage: ReactText): ToastAction {
   return {
     type: ERROR_TOAST,
     toast: toastMessage,
