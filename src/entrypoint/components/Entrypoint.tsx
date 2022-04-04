@@ -1,8 +1,8 @@
+import AllUsers from '../../users/components/allUsers';
 export default function EntryPoint() {
-  eval('console.log("test")');
   return (
     <div>
-        Hello World
+      <AllUsers />
     </div>
   );
 };

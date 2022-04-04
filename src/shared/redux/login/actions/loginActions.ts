@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { Dispatch } from 'react';
 import { LoginAction } from '../types';
 import { errorNotice, successNotice } from '../../dialogs/actions/toastActions';
@@ -16,7 +16,8 @@ export function fetchLoginRequest(payload: object): LoginAction {
   };
 };
 
-export function fetchLoginFailure(error: any): LoginAction {
+// eslint-disable-next-line max-len
+export function fetchLoginFailure(error: AxiosError['response'] | AxiosError['request']): LoginAction {
   return {
     type: FETCH_LOGIN_FAILURE,
     payload: error.data,

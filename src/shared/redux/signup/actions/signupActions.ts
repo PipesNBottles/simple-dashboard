@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { Dispatch } from 'react';
 import { SignupAction } from '../types';
 import { errorNotice, successNotice } from '../../dialogs/actions/toastActions';
@@ -17,7 +17,8 @@ export function fetchSignupRequest(payload: object): SignupAction {
   };
 };
 
-export function fetchSignupFailure(error: any): SignupAction {
+// eslint-disable-next-line max-len
+export function fetchSignupFailure(error: AxiosError['response'] | AxiosError['request']): SignupAction {
   return {
     type: FETCH_SIGN_UP_FAILURE,
     payload: error.data,
