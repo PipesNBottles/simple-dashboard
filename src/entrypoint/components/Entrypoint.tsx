@@ -1,4 +1,4 @@
-import AllUsers from '../../users/components/allUsers';
+import AllUsers from '../../users';
 export default function EntryPoint() {
   return (
     <div>
