@@ -20,3 +20,7 @@ export function getLoginToken(state: RootState): string | null {
 export function getUserInfo(state: RootState): User[] {
   return state.users.payload;
 }
+
+export function getSignupToken(state: RootState): string | undefined {
+  return state.signup.payload?.token?.id;
+}

@@ -6,12 +6,12 @@ import { SignupInputs } from '../../shared/Inputs';
 import { Levels } from '../../shared/Enums';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSignup } from '../../shared/redux/signup/actions/signupActions';
-import { getUserInfo } from '../../shared/redux/selectors';
+import { getSignupToken } from '../../shared/redux/selectors';
 
 const SignupForm: React.FC = () => {
   const { register, handleSubmit } = useForm<SignupInputs>();
   const dispatch = useDispatch();
-  const currState = useSelector(getUserInfo);
+  const currState = useSelector(getSignupToken);
   const navigate = useNavigate();
 
   useEffect(() => {

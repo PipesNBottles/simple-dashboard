@@ -1,5 +1,8 @@
 import { User } from '../../Inputs';
 
+interface SignupUser {
+  token: User
+}
 export interface SignupAction {
   type: string,
   payload: object,
@@ -10,7 +13,7 @@ export interface SignupAction {
 
 export interface SignupState {
   loading: boolean,
-  payload : User | undefined,
+  payload : SignupUser | undefined,
   error?: string,
   status?: number,
 };
