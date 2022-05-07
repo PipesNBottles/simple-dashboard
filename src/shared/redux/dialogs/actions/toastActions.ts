@@ -53,9 +53,9 @@ export function errorNotice(error: AxiosError['response']) {
   return createToast(errorMessage);
 }
 
-export function successNotice() {
+export function successNotice(msg: string = 'Successful Action') {
   const toastMessage: ToastDetails = {
-    message: 'Successful Action',
+    message: msg,
     duration: 3,
     type: SUCCESS_TOAST,
   };
