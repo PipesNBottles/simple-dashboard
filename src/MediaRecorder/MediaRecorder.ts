@@ -1,3 +1,5 @@
+// eslint-disable-next-line max-len
+import { MediaRecorder as ExtendableMediaRecorder, IMediaRecorder } from 'extendable-media-recorder';
 import { ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 
 export type ReactMediaRecorderRenderProps = {
@@ -71,7 +73,7 @@ export function useReactMediaRecorder({
   stopStreamsOnStop = true,
   askPermissionOnMount = false,
 }: ReactMediaRecorderHookProps): ReactMediaRecorderRenderProps {
-  const mediaRecorder = useRef<MediaRecorder | null>(null);
+  const mediaRecorder = useRef<IMediaRecorder | null >(null);
   const mediaChunks = useRef<Blob[]>([]);
   const mediaStream = useRef<MediaStream | null>(null);
   const [status, setStatus] = useState<StatusMessages>('idle');
@@ -114,6 +116,7 @@ export function useReactMediaRecorder({
       }
       setStatus('idle');
     } catch (error: any) {
+      console.log(error);
       setError(error.name);
       setStatus('idle');
     }
@@ -202,8 +205,8 @@ export function useReactMediaRecorder({
       if (!mediaStream.current.active) {
         return;
       }
-      mediaRecorder.current = new MediaRecorder(
-        mediaStream.current, mediaRecorderOptions,
+      mediaRecorder.current = new ExtendableMediaRecorder(
+        mediaStream.current, mediaRecorderOptions || undefined,
       );
       mediaRecorder.current.ondataavailable = onRecordingActive;
       mediaRecorder.current.onstop = onRecordingStop;

@@ -11,21 +11,20 @@ export default function WelcomPage() {
     useReactMediaRecorder({
       audio: true,
       video: false,
-      // blobPropertyBag: {
-      //   type: 'audio/webm',
-      // },
-      mediaRecorderOptions: {
-        mimeType: 'audio/webm',
+      blobPropertyBag: {
+        type: 'audio/wav',
       },
-    });
+      mediaRecorderOptions: {
+        mimeType: 'audio/wav',
+      } });
 
   const onClick = async () => {
     // @ts-ignore
     const audioBlob = await fetch(mediaBlobUrl).then((r) => r.blob());
     const audiofile = new File(
       [audioBlob],
-      'audiofile.webm',
-      { type: 'audio/webm' });
+      'audiofile.wav',
+      { type: 'audio/wav' });
     const formData = new FormData();
     formData.append('file', audiofile);
     axios.post('http://0.0.0.0:8000/v1/arabic', formData)
