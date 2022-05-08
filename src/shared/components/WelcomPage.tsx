@@ -9,13 +9,15 @@ export default function WelcomPage() {
   const dispatch = useDispatch();
   const { status, startRecording, stopRecording, mediaBlobUrl } =
     useReactMediaRecorder({
+      audio: true,
       video: false,
-      blobPropertyBag: {
-        type: 'audio/webm',
-      },
+      // blobPropertyBag: {
+      //   type: 'audio/webm',
+      // },
       mediaRecorderOptions: {
-        mimeType: 'audio/webm ;codec=pcm',
-      } });
+        mimeType: 'audio/webm',
+      },
+    });
 
   const onClick = async () => {
     // @ts-ignore
@@ -57,7 +59,7 @@ export default function WelcomPage() {
             >
               Stop Recording
             </button>
-            <audio src={ mediaBlobUrl } controls autoPlay />
+            <audio src={ mediaBlobUrl } controls />
           </div>
           <div>
             <button

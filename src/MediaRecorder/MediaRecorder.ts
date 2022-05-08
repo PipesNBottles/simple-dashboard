@@ -23,7 +23,7 @@ export type ReactMediaRecorderHookProps = {
   onStop?: (blobUrl: string, blob: Blob) => void;
   onStart?: () => void;
   blobPropertyBag?: BlobPropertyBag;
-  mediaRecorderOptions?: MediaRecorderOptions | null;
+  mediaRecorderOptions?: MediaRecorderOptions | undefined;
   customMediaStream?: MediaStream | null;
   stopStreamsOnStop?: boolean;
   askPermissionOnMount?: boolean;
@@ -66,7 +66,7 @@ export function useReactMediaRecorder({
   onStart = () => null,
   blobPropertyBag,
   screen = false,
-  mediaRecorderOptions = null,
+  mediaRecorderOptions = undefined,
   customMediaStream = null,
   stopStreamsOnStop = true,
   askPermissionOnMount = false,
@@ -203,7 +203,7 @@ export function useReactMediaRecorder({
         return;
       }
       mediaRecorder.current = new MediaRecorder(
-        mediaStream.current, mediaRecorderOptions || undefined,
+        mediaStream.current, mediaRecorderOptions,
       );
       mediaRecorder.current.ondataavailable = onRecordingActive;
       mediaRecorder.current.onstop = onRecordingStop;
