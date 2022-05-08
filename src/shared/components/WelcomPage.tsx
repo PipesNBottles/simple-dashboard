@@ -8,7 +8,14 @@ import axios from 'axios';
 export default function WelcomPage() {
   const dispatch = useDispatch();
   const { status, startRecording, stopRecording, mediaBlobUrl } =
-    useReactMediaRecorder({ video: false, askPermissionOnMount: true });
+    useReactMediaRecorder({
+      video: false,
+      blobPropertyBag: {
+        type: 'audio/webm',
+      },
+      mediaRecorderOptions: {
+        mimeType: 'audio/webm ;codec=pcm',
+      } });
 
   const onClick = async () => {
     // @ts-ignore
@@ -16,12 +23,12 @@ export default function WelcomPage() {
     const audiofile = new File(
       [audioBlob],
       'audiofile.webm',
-      { type: 'audio/wav' });
+      { type: 'audio/webm' });
     const formData = new FormData();
     formData.append('file', audiofile);
     axios.post('http://0.0.0.0:8000/v1/arabic', formData)
       .then((response) => {
-        console.log(response.data);
+        dispatch(successNotice(response.data.msg));
       })
       .catch((error) => {
         if (axios.isAxiosError(error)) {
@@ -30,7 +37,6 @@ export default function WelcomPage() {
           dispatch(errorNotice(error.request));
         }
       });
-    dispatch(successNotice('helllo world'));
   };
 
   return (
