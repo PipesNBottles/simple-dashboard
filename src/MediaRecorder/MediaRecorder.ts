@@ -1,6 +1,7 @@
 // eslint-disable-next-line max-len
-import { MediaRecorder as ExtendableMediaRecorder, IMediaRecorder } from 'extendable-media-recorder';
+import { register, MediaRecorder as ExtendableMediaRecorder, IMediaRecorder } from 'extendable-media-recorder';
 import { ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import { connect } from 'extendable-media-recorder-wav-encoder';
 
 export type ReactMediaRecorderRenderProps = {
   error: string;
@@ -81,6 +82,13 @@ export function useReactMediaRecorder({
   // eslint-disable-next-line max-len
   const [mediaBlobUrl, setMediaBlobUrl] = useState<string | undefined>(undefined);
   const [error, setError] = useState<keyof typeof RecorderErrors>('NONE');
+
+  useEffect(() => {
+    const setup = async () => {
+      await register(await connect());
+    };
+    setup();
+  }, []);
 
   const getMediaStream = useCallback(async () => {
     setStatus('acquiring_media');
