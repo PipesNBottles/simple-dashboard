@@ -174,7 +174,7 @@ export function useReactMediaRecorder({
     return () => {
       if (mediaStream.current) {
         const tracks = mediaStream.current.getTracks();
-        tracks.forEach((track) => track.stop());
+        tracks.forEach((track) => track.clone().stop());
       }
     };
   }, [

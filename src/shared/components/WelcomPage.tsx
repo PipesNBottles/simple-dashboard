@@ -16,7 +16,8 @@ export default function WelcomPage() {
       },
       mediaRecorderOptions: {
         mimeType: 'audio/wav',
-      } });
+      },
+    });
 
   const onClick = async () => {
     // @ts-ignore
