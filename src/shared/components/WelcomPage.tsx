@@ -4,8 +4,10 @@ import {
   errorNotice,
   successNotice } from '../redux/dialogs/actions/toastActions';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
 
 export default function WelcomPage() {
+  const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const { status, startRecording, stopRecording, mediaBlobUrl } =
     useReactMediaRecorder({
@@ -19,7 +21,7 @@ export default function WelcomPage() {
       },
     });
 
-  const onClick = async () => {
+  const onClick = async (data: any) => {
     // @ts-ignore
     const audioBlob = await fetch(mediaBlobUrl).then((r) => r.blob());
     const audiofile = new File(
@@ -28,7 +30,7 @@ export default function WelcomPage() {
       { type: 'audio/wav' });
     const formData = new FormData();
     formData.append('file', audiofile);
-    axios.post('http://0.0.0.0:8000/v1/arabic', formData)
+    axios.post('http://0.0.0.0:8000/v1/arabic', formData, { params: { word: data.word } })
       .then((response) => {
         dispatch(successNotice(response.data.msg));
       })
@@ -62,12 +64,29 @@ export default function WelcomPage() {
             <audio src={ mediaBlobUrl } controls />
           </div>
           <div>
-            <button
-              type='submit'
-              className="btn btn-dark btn-large"
-              onClick={ onClick }>
-              submit
-            </button>
+            <form>
+              <div className="form-row">
+                <div className="form-group col-md">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="input-word"
+                    placeholder="Enter word"
+                    {...register('word', { required: true })}
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-3 mt-3">
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    onClick={handleSubmit(onClick)}>
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
